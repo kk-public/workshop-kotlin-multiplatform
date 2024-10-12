@@ -53,9 +53,9 @@ fun MainView(
     vm: MainViewModel = koinViewModel<MainViewModel>(),
     onLogout: () -> Unit
 ) {
-    vm.onLogout = onLogout
+    // TODO: handle logout callback
 
-    vm.loadData()
+    // TODO: load initial data
 
     AppTheme {
         Surface(
@@ -63,12 +63,7 @@ fun MainView(
             color = AppColorsPalette.current.background
         ) {
             MainContentView(
-                customer = vm.customer,
-                cards = vm.cards,
-                selectedCard = vm.selectedCard,
-                onSelect = vm::selectCard,
-                transactions = vm.transactions,
-                onLogout = vm::logout
+                customer = vm.customer
             )
         }
     }
@@ -77,12 +72,7 @@ fun MainView(
 @Preview
 @Composable
 fun MainContentView(
-    customer: Customer?,
-    cards: List<Card>,
-    selectedCard: Card?,
-    onSelect: (Card) -> Unit,
-    transactions: List<Transaction>,
-    onLogout: () -> Unit
+    customer: Customer?
 ) {
     Column(
         modifier = Modifier
@@ -100,7 +90,9 @@ fun MainContentView(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 OutlinedButton(
-                    onClick = onLogout
+                    onClick = {
+                        // TODO: handle logout
+                    }
                 ) {
                     Text(
                         "Logout",
@@ -110,36 +102,16 @@ fun MainContentView(
                     )
                 }
             }
-        }
-        LazyRow(
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            items(cards) { card ->
-                CardView(
-                    card = card,
-                    isSelected = card.id == selectedCard?.id,
-                    onSelect = { onSelect(card) }
-                )
-            }
-        }
-        LazyColumn(
-            modifier = Modifier.weight(1f),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(transactions) { transaction ->
-                TransactionView(transaction = transaction)
-            }
+
+            // TODO: display cards
+
+            // TODO: display transactions for selected cards
         }
     }
 }
 
 @Composable
 fun CardView(
-    card: Card,
-    isSelected: Boolean,
-    onSelect: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -148,40 +120,8 @@ fun CardView(
                 AppColorsPalette.current.surface300,
                 shape = RoundedCornerShape(16.dp)
             )
-            .border(
-                width = if (isSelected) 2.dp else 0.dp,
-                color = if (isSelected) AppColorsPalette.current.tint else Color.Transparent,
-                shape = RoundedCornerShape(16.dp)
-            )
-            .clickable { onSelect() }
     ) {
-        Column(
-            modifier = Modifier.padding(12.dp)
-        ) {
-            Text(
-                text = "${card.balance} ${getCurrency(card.currency, card.currencyCode)}",
-                style = MaterialTheme.typography.bodyLarge,
-                color = AppColorsPalette.current.utility400
-            )
-            Spacer(modifier = Modifier.weight(1f))
-
-            Text(
-                text = "**** **** **** ${card.number.takeLast(4)}",
-                style = MaterialTheme.typography.bodyMedium,
-                color = AppColorsPalette.current.utility400
-            )
-
-            Spacer(modifier = Modifier.weight(1f))
-            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
-                getIcon(card.network)?.let { networkIcon ->
-                    Image(
-                        modifier = Modifier.size(width = 36.dp, height = 24.dp),
-                        painter = painterResource(networkIcon),
-                        contentDescription = null
-                    )
-                }
-            }
-        }
+        // TODO: display card details
     }
 }
 

@@ -4,7 +4,7 @@ import dev.community.gdg.baku.kmpbank.data.repositories.transaction.local.dto.Tr
 import kotlinx.coroutines.flow.Flow
 
 interface TransactionLocalData {
-    fun observeTransactionsByCard(cardID: String): Flow<List<TransactionLocalDTO>>
+    fun observeTransactions(): Flow<List<TransactionLocalDTO>>
     suspend fun save(cardID: String, transactions: List<TransactionLocalDTO>)
     suspend fun clearAll()
 }
@@ -12,8 +12,9 @@ interface TransactionLocalData {
 class TransactionLocalDataImpl(
     private val dao: TransactionDAO
 ) : TransactionLocalData {
-    override fun observeTransactionsByCard(cardID: String): Flow<List<TransactionLocalDTO>> {
-        return dao.observeTransactions(cardID)
+    override fun observeTransactions(): Flow<List<TransactionLocalDTO>> {
+        // TODO: fix the query
+        return dao.observeTransactions()
     }
 
     override suspend fun save(cardID: String, transactions: List<TransactionLocalDTO>) {

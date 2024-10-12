@@ -28,9 +28,7 @@ class AuthLocalDataImpl(
     private val KEY_CUSTOMER = "customer"
 
     override suspend fun saveToken(token: String) {
-        dataStore.edit {
-            it[stringPreferencesKey(KEY_TOKEN)] = token
-        }
+        // TODO: implement
     }
 
     override suspend fun getToken(): String? {

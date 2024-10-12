@@ -19,7 +19,8 @@ class TransactionRepositoryImpl(
     }
 
     override fun observeTransactionsByCard(card: Card): Flow<List<Transaction>> {
-        return localData.observeTransactionsByCard(card.id)
+        // TODO: return transactions by card
+        return localData.observeTransactions()
             .map { it.map { transaction -> transaction.toDomain() } }
     }
 

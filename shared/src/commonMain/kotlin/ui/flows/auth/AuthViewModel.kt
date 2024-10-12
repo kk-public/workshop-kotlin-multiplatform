@@ -7,12 +7,12 @@ import dev.community.gdg.baku.kmpbank.domain.usecases.auth.AuthorizeUseCase
 import ui.base.BaseViewModel
 
 class AuthViewModel(
-    private val authorizeUseCase: AuthorizeUseCase,
+    private val authorizeUseCase: AuthorizeUseCase
 ) : BaseViewModel() {
-    var email by mutableStateOf("example@company.com")
+    var email by mutableStateOf("")
         private set
 
-    var password by mutableStateOf("password")
+    var password by mutableStateOf("")
         private set
 
     var onAuthorized: (() -> Unit)? = null
@@ -31,7 +31,7 @@ class AuthViewModel(
                 onAuthorized?.invoke()
             }
             onError = {
-                print(it)
+                println(it)
             }
         }
     }

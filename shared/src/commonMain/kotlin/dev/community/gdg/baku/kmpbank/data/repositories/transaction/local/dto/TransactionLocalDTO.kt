@@ -34,12 +34,8 @@ data class TransactionLocalDTO(
         return Transaction(
             id = id,
             amount = amount.toDoubleOrNull() ?: 0.0,
-            currency = when (currency) {
-                "AZN" -> Currency.AZN
-                "USD" -> Currency.USD
-                "EUR" -> Currency.EUR
-                else -> Currency.UNKNOWN
-            },
+            // TODO: fix currency mapping
+            currency = Currency.AZN,
             currencyCode = currency,
             category = category,
             description = title,

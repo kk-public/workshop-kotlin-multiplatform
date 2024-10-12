@@ -9,11 +9,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TransactionDAO {
-    @Query("SELECT * FROM transactions WHERE cardId = :cardID")
-    suspend fun getTransactions(cardID: String): List<TransactionLocalDTO>
-
-    @Query("SELECT * FROM transactions WHERE cardId = :cardID")
-    fun observeTransactions(cardID: String): Flow<List<TransactionLocalDTO>>
+    @Query("SELECT * FROM transactions")
+    fun observeTransactions(): Flow<List<TransactionLocalDTO>>
 
     @Upsert
     suspend fun save(transactions: List<TransactionLocalDTO>)

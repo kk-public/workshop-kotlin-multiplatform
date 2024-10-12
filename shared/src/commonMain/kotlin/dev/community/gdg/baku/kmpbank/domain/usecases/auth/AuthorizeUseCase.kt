@@ -8,8 +8,8 @@ class AuthorizeUseCase(
 ) : BaseAsyncUseCase<AuthorizeUseCase.Params, Unit>() {
 
     override suspend fun executeRoutine(params: Params) {
-        repo.authorize(params.email, params.password)
-        repo.syncCustomer()
+        // TODO: implement
+        throw NotImplementedError("Not implemented")
     }
 
     data class Params(
